@@ -50,7 +50,7 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
   name = 'Dreamy Translations';
   icon = 'src/en/dreamyTranslations/icon.png';
   site = 'https://dreamy-translations.com';
-  version = '1.1.2';
+  version = '1.1.3';
 
   filters: Filters | undefined = undefined;
   imageRequestInit?: Plugin.ImageRequestInit | undefined = undefined;
@@ -384,8 +384,10 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
       '"chapters":[',
     );
 
+    const rawValue = storage.get('hideLocked');
+
     throw new Error(
-      'DEBUG: hideLocked = ' + JSON.stringify(storage.get('hideLocked')),
+      `DEBUG: hideLocked = ${JSON.stringify(rawValue)} (type: ${typeof rawValue})`,
     );
 
     const novel: Plugin.SourceNovel = {
