@@ -50,7 +50,7 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
   name = 'Dreamy Translations';
   icon = 'src/en/dreamyTranslations/icon.png';
   site = 'https://dreamy-translations.com';
-  version = '1.1.3';
+  version = '1.1.33333';
 
   filters: Filters | undefined = undefined;
   imageRequestInit?: Plugin.ImageRequestInit | undefined = undefined;
@@ -396,12 +396,18 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
         : NovelStatus.Ongoing,
     };
 
-    // throw new Error(
-    //   `DEBUG: hideLocked = ${storage.get('hideLocked')} (type: ${typeof storage.get('hideLocked')})`
-    // );
+    const raw = storage.get('hideLocked');
+    const fromSettings = this.pluginSettings.hideLocked.value;
+
+    throw new Error(
+      `DEBUG ` +
+        `raw=${JSON.stringify(raw)} type=${typeof raw} ` +
+        `raw===true: ${raw === true} ` +
+        `raw=='true': ${raw === 'true'} ` +
+        `settingsValue=${JSON.stringify(fromSettings)}`,
+    );
 
     // Filter locked chapters if the user enabled the setting
-    const raw = storage.get('hideLocked');
     const shouldHideLocked = raw === true || raw === 'true';
     // just to make sure that if raw == true damn it
 
