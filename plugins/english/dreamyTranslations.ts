@@ -50,7 +50,7 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
   name = 'Dreamy Translations';
   icon = 'src/en/dreamyTranslations/icon.png';
   site = 'https://dreamy-translations.com';
-  version = '1.1.1';
+  version = '1.1.3';
 
   filters: Filters | undefined = undefined;
   imageRequestInit?: Plugin.ImageRequestInit | undefined = undefined;
@@ -401,7 +401,9 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
     // );
 
     // Filter locked chapters if the user enabled the setting
-    const shouldHideLocked = storage.get('hideLocked') === true;
+    const raw = storage.get('hideLocked');
+    const shouldHideLocked = raw === true || raw === 'true';
+    // just to make sure that if raw == true damn it
 
     const chaptersToShow = shouldHideLocked
       ? data.chapters.filter(ch => ch.free)
