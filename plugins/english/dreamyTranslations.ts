@@ -50,7 +50,7 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
   name = 'Dreamy Translations';
   icon = 'src/en/dreamyTranslations/icon.png';
   site = 'https://dreamy-translations.com';
-  version = '1.1.3';
+  version = '1.1.1';
 
   filters: Filters | undefined = undefined;
   imageRequestInit?: Plugin.ImageRequestInit | undefined = undefined;
@@ -384,12 +384,6 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
       '"chapters":[',
     );
 
-    const rawValue = storage.get('hideLocked');
-
-    throw new Error(
-      `DEBUG: hideLocked = ${JSON.stringify(rawValue)} (type: ${typeof rawValue})`,
-    );
-
     const novel: Plugin.SourceNovel = {
       path: novelPath,
       name: data.project.title || 'Untitled',
@@ -403,7 +397,7 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
     };
 
     // Filter locked chapters if the user enabled the setting
-    const shouldHideLocked = storage.get('hideLocked') === 'true';
+    const shouldHideLocked = storage.get('hideLocked') === true;
 
     const chaptersToShow = shouldHideLocked
       ? data.chapters.filter(ch => ch.free)
@@ -426,7 +420,7 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
     if (!data.hasAccess) {
       throw new Error(
         'This chapter requires premium access and cannot be read here. ' +
-          'You can enable "Hide locked chapters" in the plugin settings to skip locked chapters.',
+          'You can enable "Hide locked chapters" in the plugin settings to filter out locked chapters.',
       );
     }
 
