@@ -384,6 +384,10 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
       '"chapters":[',
     );
 
+    throw new Error(
+      'DEBUG: hideLocked = ' + JSON.stringify(storage.get('hideLocked')),
+    );
+
     const novel: Plugin.SourceNovel = {
       path: novelPath,
       name: data.project.title || 'Untitled',
