@@ -50,7 +50,7 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
   name = 'Dreamy Translations';
   icon = 'src/en/dreamyTranslations/icon.png';
   site = 'https://dreamy-translations.com';
-  version = '1.1.44444';
+  version = '1.1.1';
 
   filters: Filters | undefined = undefined;
   imageRequestInit?: Plugin.ImageRequestInit | undefined = undefined;
@@ -396,14 +396,9 @@ class DreamyTranslationsPlugin implements Plugin.PluginBase {
         : NovelStatus.Ongoing,
     };
 
-    const raw = storage.get('hideLocked');
-    const sv = this.pluginSettings.hideLocked.value;
-
-    throw new Error(`raw=${raw}|rt=${raw === true}|sv=${sv}|st=${sv === true}`);
-
     // Filter locked chapters if the user enabled the setting
+    const raw = storage.get('hideLocked');
     const shouldHideLocked = raw === true || raw === 'true';
-    // just to make sure that if raw == true damn it
 
     const chaptersToShow = shouldHideLocked
       ? data.chapters.filter(ch => ch.free)
